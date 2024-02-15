@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "../../../../ECE3829-Lab3.ip_user_files/ipstatic" \
+"../../../../ECE3829-Lab3.srcs/sources_1/new/LightSensor.sv" \
+"../../../../ECE3829-Lab3.srcs/sim_1/new/LightSensorSim.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
