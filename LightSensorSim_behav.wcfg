@@ -11,38 +11,42 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="2.791666 us"></ZoomStartTime>
-      <ZoomEndTime time="12.641667 us"></ZoomEndTime>
-      <Cursor1Time time="11.000000 us"></Cursor1Time>
+      <ZoomStartTime time="19.212689 us"></ZoomStartTime>
+      <ZoomEndTime time="31.702713 us"></ZoomEndTime>
+      <Cursor1Time time="25.850499 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
       <ValueColumnWidth column_width="120"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="10" />
+   <WVObjectSize size="9" />
    <wvobject fp_name="/LightSensorSim/CLK10" type="logic">
       <obj_property name="ElementShortName">CLK10</obj_property>
       <obj_property name="ObjectShortName">CLK10</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/LightSensorSim/uut/serial_clk" type="logic">
       <obj_property name="ElementShortName">serial_clk</obj_property>
       <obj_property name="ObjectShortName">serial_clk</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject fp_name="/LightSensorSim/SCLK" type="logic">
-      <obj_property name="ElementShortName">SCLK</obj_property>
-      <obj_property name="ObjectShortName">SCLK</obj_property>
+   <wvobject fp_name="/LightSensorSim/uut/isReading" type="logic">
+      <obj_property name="ElementShortName">isReading</obj_property>
+      <obj_property name="ObjectShortName">isReading</obj_property>
    </wvobject>
    <wvobject fp_name="/LightSensorSim/CS_N" type="logic">
       <obj_property name="ElementShortName">CS_N</obj_property>
       <obj_property name="ObjectShortName">CS_N</obj_property>
    </wvobject>
+   <wvobject fp_name="/LightSensorSim/SCLK" type="logic">
+      <obj_property name="ElementShortName">SCLK</obj_property>
+      <obj_property name="ObjectShortName">SCLK</obj_property>
+   </wvobject>
    <wvobject fp_name="/LightSensorSim/read_val" type="array">
       <obj_property name="ElementShortName">read_val[7:0]</obj_property>
       <obj_property name="ObjectShortName">read_val[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/LightSensorSim/uut/isReading" type="logic">
-      <obj_property name="ElementShortName">isReading</obj_property>
-      <obj_property name="ObjectShortName">isReading</obj_property>
    </wvobject>
    <wvobject fp_name="/LightSensorSim/uut/read_state" type="array">
       <obj_property name="ElementShortName">read_state[31:0]</obj_property>
@@ -55,9 +59,6 @@
    <wvobject fp_name="/LightSensorSim/uut/read_seq_ptr" type="array">
       <obj_property name="ElementShortName">read_seq_ptr[4:0]</obj_property>
       <obj_property name="ObjectShortName">read_seq_ptr[4:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/LightSensorSim/uut/sample_trig_counter" type="array">
-      <obj_property name="ElementShortName">sample_trig_counter[20:0]</obj_property>
-      <obj_property name="ObjectShortName">sample_trig_counter[20:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>

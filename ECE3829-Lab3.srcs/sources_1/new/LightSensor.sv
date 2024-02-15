@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 //Captures values from ADC081S021 light sensor
-module LightSensor#(parameter SAMPLE_RATE_HZ = 1)(
+module LightSensor#(parameter [21:0] SAMPLE_RATE_HZ = 1)(
     input wire CLK10, reset_n,
     input wire SDATA,
     output wire SCLK,
@@ -11,7 +11,7 @@ module LightSensor#(parameter SAMPLE_RATE_HZ = 1)(
 
     reg serial_clk = 'b0;
     reg isReading = 'b0;
-    enum {READ_LEAD_0, READ_DATA, READ_TRAIL_0, READ_END} read_state;
+    enum reg[1:0] {READ_LEAD_0, READ_DATA, READ_TRAIL_0, READ_END} read_state;
     reg [7:0] read_temp_val = 'b0;
     reg [4:0] read_seq_ptr = 'b0;
     
@@ -20,7 +20,7 @@ module LightSensor#(parameter SAMPLE_RATE_HZ = 1)(
     
     //CS# Triggering & Sample Clock
     reg [20:0] sample_trig_counter = 'b0;
-    localparam SAMPLE_CLK_END = 2_500_000 / SAMPLE_RATE_HZ - 1; //2.5MHz -> XHz
+    localparam [21:0] SAMPLE_CLK_END = 2_500_000 / SAMPLE_RATE_HZ - 1; //2.5MHz -> XHz
     always_ff @(negedge serial_clk) begin
         if (~reset_n) begin
             isReading <= 'b0;
