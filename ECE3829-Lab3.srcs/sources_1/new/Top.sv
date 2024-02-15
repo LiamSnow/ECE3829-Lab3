@@ -2,10 +2,11 @@
 
 module Top(
     input wire CLK100,
-    input wire buttonCenter,
     output wire [6:0] sevenSegmentSegments,
     output wire sevenSegmentDecimal,
-    output wire [3:0] sevenSegmentAnodes
+    output wire [3:0] sevenSegmentAnodes,
+    output wire JA1, JA4,
+    input wire JA3, buttonCenter
     );
 
     //10MHz Clock Gen
@@ -18,16 +19,19 @@ module Top(
     );
 
     //Light Sensor
+    wire [7:0] light_sensor_val;
     LightSensor LightSensor(
-        
+        .CLK10(CLK10),
+        .reset_n(reset_n),
+        .SDATA(JA3),
+        .SCLK(JA4),
+        .CS_N(JA1),
+        .read_val(light_sensor_val)
     );
 
-    //Seven Segment Display
-    /*
-    • Display the light sensor value on the 2 right most displays (display C and D).
-    • Display the last two digits of your WPI ID on displays A and B.
-    */
-    wire [3:0] [3:0] digitValues = '{4'd9, 4'd8, 4'd8, 4'd7};
+    //Seven Segment Display (last 2 digits of WPI ID on left, light sensor value on right)
+    wire [3:0] [3:0] digitValues = '{4'd8, 4'd8, 
+        light_sensor_val[7:4], light_sensor_val[3:0]};
     SevenSegmentDisplay SevenSegmentDisplay(
         .CLK10(CLK10),
         .reset_n(reset_n),

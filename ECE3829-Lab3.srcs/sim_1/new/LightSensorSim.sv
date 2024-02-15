@@ -1,35 +1,27 @@
 `timescale 1ns / 1ps
 
-module LightSensorSim();
-
-    reg CLK10 = 0; //10MHz
-    always #50 CLK10 = ~CLK10;
-
-    wire SCLK, CS_N;
-    wire [7:0] read_val;
-    
-    reg serial_clk = 'b0, SDATA = 'b0;
-
-    LightSensor #('d100_000) uut(
-        .CLK10(CLK10),
-        .reset_n(1'b1),
-        .SDATA(SDATA),
-        .SCLK(SCLK),
-        .CS_N(CS_N),
-        .read_val(read_val)
+module LightSensorSim(
+    input wire SCLK /*1-4MHz*/, CS_N,
+    output tri SDATA,
+    input wire [7:0] output_value
     );
 
-    always_ff @(negedge serial_clk) begin
-        SDATA <= ~SDATA;
-    end 
+    reg inSeq = 0;
+    reg [14:0] word;
+    assign SDATA = inSeq ? word[14] : 1'bz;
 
-    //Generate a 2.5MHz "Slow Clock" (ADC081S021 requires 1-4MHz)
-    reg [1:0] serial_clk_counter = 'b0;
-    always_ff @(posedge CLK10) begin
-        serial_clk_counter <= serial_clk_counter + 'b1;
-        if (serial_clk_counter == 3) begin
-            serial_clk <= ~serial_clk;
+    always_ff @(posedge SCLK) begin
+        if (CS_N) begin
+            inSeq <= 1'b0;
+        end
+        else begin
+            if (~inSeq) begin
+                word <= {3'b0, output_value, 4'b0};
+                inSeq <= 1'b1;
+            end
+            else begin
+                word <= word << 1;
+            end
         end
     end
-
 endmodule
