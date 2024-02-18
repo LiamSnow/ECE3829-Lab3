@@ -8,11 +8,15 @@ module SevenSegmentDisplay(
     output wire [3:0] anodes
     );
 
-    reg [1:0] currentDigit = 0;
-    wire [3:0] currentDigitValue = digitValues[currentDigit];
+    reg [1:0] currentDigit = 0; //digit we are setting in display
+    wire [3:0] currentDigitValue = digitValues[currentDigit]; //hex value
+    reg [15:0] slowClockCounter = 0; //10MHz -> ~305Hz
 
-    reg [15:0] slowClockCounter = 0;
+    //Anode Logic
+    assign anodes = reset_n ? ~(4'b1 << currentDigit) : 4'b1111; //1-hot encoding
+    assign decimal = 1'b1; //turns off decimal place
 
+    //Slow Clock + Digit Incrementation
     always_ff @(posedge CLK10) begin
         if (~reset_n) begin
             slowClockCounter <= 0;
@@ -27,9 +31,7 @@ module SevenSegmentDisplay(
         end
     end
     
-    assign decimal = 0;
-    assign anodes = reset_n ? ~(4'b1 << currentDigit) : 4'b1111; //inverted "1-hot encoding"
-
+    //Segment Decoding
     always_comb begin
         case (currentDigitValue)
             4'h0: segments = 7'b1000000; // 0

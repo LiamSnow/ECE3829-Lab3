@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 
 module Top(
-    input wire CLK100,
-    output wire [6:0] sevenSegmentSegments,
+    input wire CLK100, //100MHz clock
+    output wire [6:0] sevenSegmentSegments, //seven segment display ports
     output wire sevenSegmentDecimal,
     output wire [3:0] sevenSegmentAnodes,
-    output wire JA1, JA4,
-    input wire JA3, buttonCenter
+    output wire JA1, JA4, //PMOD ports for light sensor
+    input wire JA3,
+    input wire buttonCenter //button for reset
     );
 
     //10MHz Clock Gen
@@ -14,13 +15,13 @@ module Top(
     clk_wiz_0 clk_wiz_0(
         .clk_in1(CLK100),
         .clk_out1(CLK10),
-        .reset(buttonCenter),
+        .reset(buttonCenter), //center button triggers clock wiz reset, triggering a global reset
         .locked(reset_n)
     );
 
     //Light Sensor
     wire [7:0] light_sensor_val;
-    LightSensor #('d100) LightSensor(
+    LightSensor #(1/*1Hz sample rate*/) LightSensor(
         .CLK10(CLK10),
         .reset_n(reset_n),
         .SDATA(JA3),
@@ -29,9 +30,9 @@ module Top(
         .read_val(light_sensor_val)
     );
 
-    //Seven Segment Display (last 2 digits of WPI ID on left, light sensor value on right)
-    wire [3:0] [3:0] digitValues = '{4'd8, 4'd7, 
-        light_sensor_val[7:4], light_sensor_val[3:0]};
+    //Seven Segment Display
+    wire [3:0] [3:0] digitValues = '{4'd8, 4'd7, //2 digits of WPI ID (left)
+        light_sensor_val[7:4], light_sensor_val[3:0]}; //light sensor value (right)
     SevenSegmentDisplay SevenSegmentDisplay(
         .CLK10(CLK10),
         .reset_n(reset_n),

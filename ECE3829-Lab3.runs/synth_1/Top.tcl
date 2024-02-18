@@ -72,6 +72,7 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 5
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -110,8 +111,6 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc C:/Users/liams/Documents/GitHub/ECE3829-Lab3/ECE3829-Lab3.srcs/constrs_1/new/Basys.xdc
 set_property used_in_implementation false [get_files C:/Users/liams/Documents/GitHub/ECE3829-Lab3/ECE3829-Lab3.srcs/constrs_1/new/Basys.xdc]
 
-read_xdc dont_touch.xdc
-set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental C:/Users/liams/Documents/GitHub/ECE3829-Lab3/ECE3829-Lab3.srcs/utils_1/imports/synth_1/Top.dcp

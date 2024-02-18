@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Thu Feb 15 17:48:25 2024
-| Host         : SNOW-XPS running 64-bit major release  (build 9200)
+| Date         : Sun Feb 18 17:37:20 2024
+| Host         : RISC-IV running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Top_control_sets_placed.rpt
 | Design       : Top
 | Device       : xc7a35t
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |     3 |
-|    Minimum number of control sets                        |     3 |
+| Total control sets                                       |    14 |
+|    Minimum number of control sets                        |    14 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    13 |
+| Unused register locations in slices containing registers |    79 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |     3 |
-| >= 0 to < 4        |     1 |
+| Total control sets |    14 |
+| >= 0 to < 4        |    10 |
 | >= 4 to < 6        |     1 |
 | >= 6 to < 8        |     0 |
-| >= 8 to < 10       |     0 |
+| >= 8 to < 10       |     1 |
 | >= 10 to < 12      |     0 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     1 |
+| >= 16              |     2 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,10 +58,10 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               1 |            1 |
+| No           | No                    | No                     |               2 |            2 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              26 |            8 |
-| Yes          | No                    | No                     |               0 |            0 |
+| No           | Yes                   | No                     |              47 |           13 |
+| Yes          | No                    | No                     |              16 |            9 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
@@ -70,12 +70,23 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+--------------------------+---------------+--------------------------------------------+------------------+----------------+--------------+
-|       Clock Signal       | Enable Signal |              Set/Reset Signal              | Slice Load Count | Bel Load Count | Bels / Slice |
-+--------------------------+---------------+--------------------------------------------+------------------+----------------+--------------+
-| ~LightSensor/serial_clk  |               |                                            |                1 |              1 |         1.00 |
-| ~LightSensor/serial_clk  |               | LightSensor/sample_trig_counter[0]_i_1_n_0 |                2 |              5 |         2.50 |
-|  clk_wiz_0/inst/clk_out1 |               | SevenSegmentDisplay/SR[0]                  |                6 |             21 |         3.50 |
-+--------------------------+---------------+--------------------------------------------+------------------+----------------+--------------+
++--------------------------+--------------------------------------+--------------------------------------------+------------------+----------------+--------------+
+|       Clock Signal       |             Enable Signal            |              Set/Reset Signal              | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------------+--------------------------------------+--------------------------------------------+------------------+----------------+--------------+
+|  clk_wiz_0/inst/clk_out1 |                                      |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[3]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[0]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[5]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[1]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[6]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[7]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[4]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+|  serial_clk              | LightSensor/read_temp_val[2]_i_1_n_0 |                                            |                1 |              1 |         1.00 |
+| ~serial_clk              |                                      |                                            |                1 |              1 |         1.00 |
+|  serial_clk              |                                      | LightSensor/isReading_reg_0[0]             |                1 |              5 |         5.00 |
+| ~serial_clk              | LightSensor/read_val[7]_i_1_n_0      |                                            |                1 |              8 |         8.00 |
+|  clk_wiz_0/inst/clk_out1 |                                      | SevenSegmentDisplay/SR[0]                  |                6 |             20 |         3.33 |
+| ~serial_clk              |                                      | LightSensor/sample_trig_counter[0]_i_1_n_0 |                6 |             22 |         3.67 |
++--------------------------+--------------------------------------+--------------------------------------------+------------------+----------------+--------------+
 
 

@@ -6,8 +6,9 @@ module SimTop();
 
     wire SCLK, CS_N, SDATA; //pass-thru
 
-    reg [7:0] write_val = 8'b00001111;
-    wire [7:0] read_val;
+    //Simulate this file and make sure after sequence, write_val == read_val
+    reg [7:0] write_val = 8'b00001111; //value that LightSensorSim will return
+    wire [7:0] read_val; //value that LightSensor has read
     
     LightSensor #('d100_000) uut(
         .CLK10(CLK10),
@@ -24,6 +25,4 @@ module SimTop();
         .SDATA(SDATA),
         .output_value(write_val)
     );
-
-    
 endmodule
