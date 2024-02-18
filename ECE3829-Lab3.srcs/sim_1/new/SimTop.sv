@@ -6,7 +6,7 @@ module SimTop();
 
     wire SCLK, CS_N, SDATA; //pass-thru
 
-    reg [7:0] set_value = 8'b10010110;
+    reg [7:0] write_val = 8'b00001111;
     wire [7:0] read_val;
     
     LightSensor #('d100_000) uut(
@@ -22,7 +22,7 @@ module SimTop();
         .SCLK(SCLK),
         .CS_N(CS_N),
         .SDATA(SDATA),
-        .output_value()
+        .output_value(write_val)
     );
 
     

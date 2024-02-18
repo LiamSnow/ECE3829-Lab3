@@ -10,7 +10,7 @@ module LightSensorSim(
     reg [14:0] word;
     assign SDATA = inSeq ? word[14] : 1'bz;
 
-    always_ff @(posedge SCLK) begin
+    always_ff @(negedge SCLK) begin
         if (CS_N) begin
             inSeq <= 1'b0;
         end

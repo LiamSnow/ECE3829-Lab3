@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 //Captures values from ADC081S021 light sensor
-module LightSensor#(parameter [21:0] SAMPLE_RATE_HZ = 1)(
+module LightSensor#(parameter [21:0] SAMPLE_RATE_HZ = 'd1)(
     input wire CLK10, reset_n,
     input wire SDATA,
     output wire SCLK,

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="SimTop_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="SimTop" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="17.973500 us"></ZoomStartTime>
+      <ZoomEndTime time="34.773501 us"></ZoomEndTime>
+      <Cursor1Time time="50.000000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="200"></NameColumnWidth>
+      <ValueColumnWidth column_width="145"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/SimTop/CLK10" type="logic">
+      <obj_property name="ElementShortName">CLK10</obj_property>
+      <obj_property name="ObjectShortName">CLK10</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/SCLK" type="logic">
+      <obj_property name="ElementShortName">SCLK</obj_property>
+      <obj_property name="ObjectShortName">SCLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/CS_N" type="logic">
+      <obj_property name="ElementShortName">CS_N</obj_property>
+      <obj_property name="ObjectShortName">CS_N</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/SDATA" type="logic">
+      <obj_property name="ElementShortName">SDATA</obj_property>
+      <obj_property name="ObjectShortName">SDATA</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/uut_sim/inSeq" type="logic">
+      <obj_property name="ElementShortName">inSeq</obj_property>
+      <obj_property name="ObjectShortName">inSeq</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/uut/isReading" type="logic">
+      <obj_property name="ElementShortName">isReading</obj_property>
+      <obj_property name="ObjectShortName">isReading</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/uut/read_state" type="array">
+      <obj_property name="ElementShortName">read_state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">read_state[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/write_val" type="array">
+      <obj_property name="ElementShortName">write_val[7:0]</obj_property>
+      <obj_property name="ObjectShortName">write_val[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/read_val" type="array">
+      <obj_property name="ElementShortName">read_val[7:0]</obj_property>
+      <obj_property name="ObjectShortName">read_val[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SimTop/uut/read_temp_val" type="array">
+      <obj_property name="ElementShortName">read_temp_val[7:0]</obj_property>
+      <obj_property name="ObjectShortName">read_temp_val[7:0]</obj_property>
+   </wvobject>
+</wave_config>

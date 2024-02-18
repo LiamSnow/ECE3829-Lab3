@@ -20,7 +20,7 @@ module Top(
 
     //Light Sensor
     wire [7:0] light_sensor_val;
-    LightSensor LightSensor(
+    LightSensor #('d100) LightSensor(
         .CLK10(CLK10),
         .reset_n(reset_n),
         .SDATA(JA3),
@@ -30,7 +30,7 @@ module Top(
     );
 
     //Seven Segment Display (last 2 digits of WPI ID on left, light sensor value on right)
-    wire [3:0] [3:0] digitValues = '{4'd8, 4'd8, 
+    wire [3:0] [3:0] digitValues = '{4'd8, 4'd7, 
         light_sensor_val[7:4], light_sensor_val[3:0]};
     SevenSegmentDisplay SevenSegmentDisplay(
         .CLK10(CLK10),
